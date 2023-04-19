@@ -19,8 +19,19 @@ router.post("/", async (req: Request, res: Response) => {
       created_at: new Date(),
       _user_id: res.locals.decodedToken.id,
     };
-    const newRoute = await teamsController.create(team);
-    return res.status(200).send({ msg: "Team created", route: newRoute });
+    const newTeam = await teamsController.create(team);
+    return res.status(200).send({ msg: "Team created", route: newTeam });
+  } catch (error) {
+    if (error instanceof Error) return res.status(400).send(error.message);
+    return res.status(400).send("Unknown error");
+  }
+});
+
+router.patch("/", async (req: Request, res: Response) => {
+  try {
+    const team = req.body.team;
+    await teamsController.update(team);
+    return res.status(200).send({ msg: "Team Saved"});
   } catch (error) {
     if (error instanceof Error) return res.status(400).send(error.message);
     return res.status(400).send("Unknown error");

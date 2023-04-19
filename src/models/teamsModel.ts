@@ -11,6 +11,7 @@ export interface IPokemon {
 }
 
 export interface ITeam {
+  _id: any;
   name:string;
   pokemon_list?:IPokemon[];
   created_at:Date;

@@ -14,6 +14,18 @@ export const teamsController = {
     }
   },
 
+  async update(team: ITeam) {
+    try {
+      const filter = { _id: team._id, _user_id: team._user_id };
+      const update = { ...team };
+      const a = await Team.findOneAndUpdate(filter, update);
+    } catch (error) {
+      if (error instanceof Error)
+        throw new Error("Error saving team:" + error.message);
+      throw new Error("Error saving team");
+    }
+  },
+
   async getMine(userId: ObjectId) {
     try {
       const teams = await Team.find({ _user_id: userId }).sort({'created_at': -1});
