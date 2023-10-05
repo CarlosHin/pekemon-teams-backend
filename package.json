@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "ts-node-dev src/index.ts",
     "build": "tsc",
-    "start": "node ./build/index.js"
+    "start": "pm2 start ./build/index.js -n pokemon-back",
+    "stop":"pm2 delete pokemon-back"
   },
   "keywords": [],
   "author": "",
